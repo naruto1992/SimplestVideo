@@ -22,29 +22,20 @@ import com.zxwl.simplestvideodemo.R;
 import java.util.Formatter;
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MyMediaController extends FrameLayout {
 
-
     private MediaPlayerControl mPlayer;
-
     private Context mContext;
-
     private ProgressBar mProgress;
-
-    private TextView mEndTime, mCurrentTime;
-
-    private TextView mTitle;
-
     private boolean mShowing = true;
-
     private boolean mDragging;
-
     private boolean mScalable = false;
     private boolean mIsFullScreen = false;
     //    private boolean mFullscreenEnabled = false;
     private boolean firstPlay = true;
-
-
     private static final int sDefaultTimeout = 3000;
 
     private static final int STATE_PLAYING = 1;
@@ -55,7 +46,6 @@ public class MyMediaController extends FrameLayout {
 
     private int mState = STATE_LOADING;
 
-
     private static final int FADE_OUT = 1;
     private static final int SHOW_PROGRESS = 2;
     private static final int SHOW_LOADING = 3;
@@ -65,23 +55,32 @@ public class MyMediaController extends FrameLayout {
     private static final int SHOW_COMPLETE = 7;
     private static final int HIDE_COMPLETE = 8;
     StringBuilder mFormatBuilder;
-
     Formatter mFormatter;
 
-    private ImageButton mTurnButton;// 开启暂停按钮
-
-    private ImageButton mScaleButton;
-
-    private View mBackButton;// 返回按钮
-
-    private ViewGroup loadingLayout;
-
-    private ViewGroup errorLayout;
-
-    private View mTitleLayout;
-    private View mControlLayout;
-
-    private View mCenterPlayButton;
+    @BindView(R.id.rootLayout)
+    View root_layout;
+    @BindView(R.id.title)
+    TextView mTitle;
+    @BindView(R.id.has_played)
+    TextView mCurrentTime;
+    @BindView(R.id.duration)
+    TextView mEndTime;
+    @BindView(R.id.turn_button)
+    ImageButton mTurnButton;// 开启暂停按钮
+    @BindView(R.id.scale_button)
+    ImageButton mScaleButton;//全屏按钮
+    @BindView(R.id.back_btn)
+    View mBackButton;// 返回按钮
+    @BindView(R.id.loading_layout)
+    ViewGroup loadingLayout; //加载中
+    @BindView(R.id.error_layout)
+    ViewGroup errorLayout; //播放出错
+    @BindView(R.id.title_part)
+    View mTitleLayout; //视频标题
+    @BindView(R.id.control_layout)
+    View mControlLayout; //控制面板
+    @BindView(R.id.center_play_btn)
+    View mCenterPlayButton; //中心的播放按钮
 
     public MyMediaController(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -101,21 +100,12 @@ public class MyMediaController extends FrameLayout {
         mContext = context;
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View viewRoot = inflater.inflate(R.layout.mvv_player_controller, this);
+        ButterKnife.bind(this, viewRoot);
         viewRoot.setOnTouchListener(mTouchListener);
         initControllerView(viewRoot);
     }
 
-
     private void initControllerView(View v) {
-        mTitleLayout = v.findViewById(R.id.title_part);
-        mControlLayout = v.findViewById(R.id.control_layout);
-        loadingLayout = (ViewGroup) v.findViewById(R.id.loading_layout);
-        errorLayout = (ViewGroup) v.findViewById(R.id.error_layout);
-        mTurnButton = (ImageButton) v.findViewById(R.id.turn_button);
-        mScaleButton = (ImageButton) v.findViewById(R.id.scale_button);
-        mCenterPlayButton = v.findViewById(R.id.center_play_btn);
-        mBackButton = v.findViewById(R.id.back_btn);
-
         if (mTurnButton != null) {
             mTurnButton.requestFocus();
             mTurnButton.setOnClickListener(mPauseListener);
@@ -150,14 +140,11 @@ public class MyMediaController extends FrameLayout {
             mProgress.setMax(1000);
         }
 
-        mEndTime = (TextView) v.findViewById(R.id.duration);
-        mCurrentTime = (TextView) v.findViewById(R.id.has_played);
-        mTitle = (TextView) v.findViewById(R.id.title);
         mFormatBuilder = new StringBuilder();
         mFormatter = new Formatter(mFormatBuilder, Locale.getDefault());
     }
 
-
+    ///////////////////////////////////////////功能方法/////////////////////////////////////////////////////
     public void setMediaPlayer(MediaPlayerControl player) {
         mPlayer = player;
         updatePausePlay();
@@ -412,13 +399,13 @@ public class MyMediaController extends FrameLayout {
     //如果正在显示,则使之消失
     private OnTouchListener mTouchListener = new OnTouchListener() {
         public boolean onTouch(View v, MotionEvent event) {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                if (mShowing) {
-                    hide();
-                    handled = true;
-                    return true;
-                }
-            }
+//            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//                if (mShowing) {
+//                    hide();
+//                    handled = true;
+//                    return true;
+//                }
+//            }
             return false;
         }
     };

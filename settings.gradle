@@ -1,1 +1,1 @@
-include ':app', ':vitamio', ':simplestvideodemo'
+include ':app', ':vitamio', ':simplestvideodemo', ':GestureDetectorDemo'

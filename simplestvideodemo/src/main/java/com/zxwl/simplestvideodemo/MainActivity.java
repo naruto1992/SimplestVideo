@@ -1,15 +1,19 @@
 package com.zxwl.simplestvideodemo;
 
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.zxwl.simplestvideodemo.widget.MyMediaController;
 import com.zxwl.simplestvideodemo.widget.MyVideoView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements MyVideoView.VideoViewCallback {
 
@@ -21,13 +25,23 @@ public class MainActivity extends AppCompatActivity implements MyVideoView.Video
     private static final String VIDEO_URL = "http://125.39.142.86/data2/video09/2016/03/01/3871799-102-1615.mp4"; //视频播放连接
     private static final String VIDEO_TITLE = "SimplestVideo sample"; //视频标题
 
+    @BindView(R.id.videoView)
     MyVideoView mVideoView;
+
+    @BindView(R.id.media_controller)
     MyMediaController mMediaController;
 
+    @BindView(R.id.bottom_layout)
     View mBottomLayout;
+
+    @BindView(R.id.video_layout)
     View mVideoLayout;
+
+    @BindView(R.id.start)
     TextView mStart;
 
+    private static final String DEBUG_TAG = "Gestures";
+    private GestureDetector gestureDetector;
     private int mSeekPosition;
     private int cachedHeight;
     private boolean isFullscreen;
@@ -36,14 +50,10 @@ public class MainActivity extends AppCompatActivity implements MyVideoView.Video
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mVideoLayout = findViewById(R.id.video_layout);
-        mBottomLayout = findViewById(R.id.bottom_layout);
-        mVideoView = (MyVideoView) findViewById(R.id.videoView);
-        mMediaController = (MyMediaController) findViewById(R.id.media_controller);
+        ButterKnife.bind(this);
         mVideoView.setMediaController(mMediaController);
         setVideoAreaSize();
         mVideoView.setVideoViewCallback(this);
-        mStart = (TextView) findViewById(R.id.start);
         mMediaController.setTitle(VIDEO_TITLE);
 //        mStart.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -55,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements MyVideoView.Video
 //                mMediaController.setTitle(VIDEO_TITLE);
 //            }
 //        });
-
         mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
@@ -172,4 +181,5 @@ public class MainActivity extends AppCompatActivity implements MyVideoView.Video
             super.onBackPressed();
         }
     }
+
 }

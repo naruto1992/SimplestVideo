@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@android:color/transparent">
@@ -104,8 +105,8 @@
             android:background="#00000000"
             android:padding="10dp"
             android:scaleType="fitCenter"
-            android:visibility="visible"
-            android:src="@drawable/uvv_player_scale_btn" />
+            android:src="@drawable/uvv_player_scale_btn"
+            android:visibility="visible" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -151,5 +152,88 @@
         </LinearLayout>
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/gesture_volume_layout"
+        android:layout_width="80dip"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/souhu_player_gesture_bg"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/gesture_iv_player_volume"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/souhu_player_volume" />
+
+        <TextView
+            android:id="@+id/geture_tv_volume_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gesture_iv_player_volume"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:gravity="right"
+            android:text="80%"
+            android:textColor="#ffececec" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/gesture_bright_layout"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/souhu_player_gesture_bg"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/gesture_iv_player_bright"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/souhu_player_bright" />
+
+        <TextView
+            android:id="@+id/geture_tv_bright_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gesture_iv_player_bright"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:gravity="right"
+            android:text="80%"
+            android:textColor="#ffececec" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/gesture_progress_layout"
+        android:layout_width="100dip"
+        android:layout_height="100dip"
+        android:layout_centerInParent="true"
+        android:background="@drawable/souhu_player_gesture_bg"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/gesture_iv_progress"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/souhu_player_backward" />
+
+        <TextView
+            android:id="@+id/geture_tv_progress_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gesture_iv_progress"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:gravity="right"
+            android:text="00:35/24:89"
+            android:textColor="#ffececec" />
+    </RelativeLayout>
 
 </RelativeLayout>
